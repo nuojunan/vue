@@ -19,7 +19,6 @@ import store from './vuex/store';
 import ajax from './common/js/ajax';
 
 Vue.config.productionTip = false;
-
 {{#if_eq demoConfig "Mobile"}}
 Vue.use(Mint);
 {{/if_eq}}
@@ -28,7 +27,6 @@ Vue.use(ElementUI);
 Mock.bootstrap();
 {{/if_eq}}
 Vue.use(ajax);
-
 {{#if_eq demoConfig "Mobile"}}
 // error，loading是图片路径, 用require引入
 Vue.use(VueLazyload, {
@@ -65,7 +63,7 @@ Vue.prototype.$message = Mint.MessageBox;
 // 移动端点击延迟问题处理
 FastClick.attach(document.body);
 {{/if_eq}}
-
+/* eslint-disable no-new */
 new Vue({
   el: '#app',
   i18n,
