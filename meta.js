@@ -47,11 +47,11 @@ module.exports = {
     }
   },
   "filters": {
-    "src/views/demo/*": "demo",
-    "src/views/login/*": "demo",
-    "src/views/main/*": "demo",
-    "src/views/test/*": "demo",
-    "src/mock/*": "demo"
+    "src/views/login/*": "PC",
+    "src/views/main/*": "PC",
+    "src/views/test/*": "PC",
+    "src/mock/*": "PC",
+    "src/views/demo/*": "Mobile",
   },
   "completeMessage": "To get started:\n\n  {{^inPlace}}cd {{destDirName}}\n  {{/inPlace}}npm install\n  npm run dev\n\nDocumentation can be found at https://vuejs-templates.github.io/webpack"
 };
