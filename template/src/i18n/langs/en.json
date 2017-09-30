@@ -1,0 +1,10 @@
+{
+  "hello": {
+    "a": "hi!"
+  },
+  "index": {
+    "tab": ["Index", "Query", "Lang"],
+    "btn": ["Goto page", "Bomb box"],
+    "langMsg": "Please select language！"
+  }
+}

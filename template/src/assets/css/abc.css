@@ -1,0 +1,25 @@
+:root {
+  --bg-color: #381911;
+  --ft-color: blue;
+  --main-height: 300px;
+}
+@define-mixin nja-css $njaname, $color: red {
+  .nja-css-is-$(njaname) {
+    font-size: 30px;
+    color: $color;
+    @mixin-content;
+  }
+  .nja-css-is-$(njaname) span {
+    background-color: blue;
+  }
+}
+@mixin nja-css no {
+  background-color: #230011;
+  height: 300px;
+  width: 100px;
+}
+@mixin nja-css ok, green {
+  background-color: #8720ff;
+  height: 100px;
+  width: 200px;
+}
