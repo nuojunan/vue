@@ -2,10 +2,10 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
 import App from './App';
-// import FastClick from 'fastclick';
 import router from './router';
 import i18n from './i18n';
 {{#if_eq demoConfig "Mobile"}}
+import FastClick from 'fastclick';
 import VueLazyload from 'vue-lazyload';  // 引入图片懒加载模块
 import Mint from 'mint-ui';
 import 'mint-ui/lib/style.css';
