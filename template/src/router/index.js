@@ -9,8 +9,8 @@ export default new Router({
     { // 首页
       path: '/',
       name: 'index',
-      hidden: true,
       {{#if_eq demoConfig "PC"}}
+      hidden: true,
       redirect: '/login'
       {{/if_eq}}
       {{#if_eq demoConfig "Mobile"}}

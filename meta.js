@@ -34,12 +34,12 @@ module.exports = {
        "message": "Pick an UI on the mobile or PC side",
        "choices": [
          {
-           "name": "element-ui",
+           "name": "PC(element-ui)",
            "value": "PC",
            "short": "PC"
          },
          {
-           "name": "mint-ui",
+           "name": "Mobile(mint-ui)",
            "value": "Mobile",
            "short": "Mobile"
          }
@@ -50,7 +50,8 @@ module.exports = {
     "src/views/demo/*": "demo",
     "src/views/login/*": "demo",
     "src/views/main/*": "demo",
-    "src/views/test/*": "demo"
+    "src/views/test/*": "demo",
+    "src/mock/*": "demo"
   },
   "completeMessage": "To get started:\n\n  {{^inPlace}}cd {{destDirName}}\n  {{/inPlace}}npm install\n  npm run dev\n\nDocumentation can be found at https://vuejs-templates.github.io/webpack"
 };
