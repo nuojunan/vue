@@ -5,7 +5,7 @@
 		<el-col :span="24" class="header">
 			<el-col :span="10" class="logo" :class="collapsed?'logo-collapse-width':'logo-width'">
 				<img src="../../assets/img/logo.png" @click="collapse">
-				<a @click="collapse">{{collapsed?'':sysName}}</a>
+				<a @click="collapse">\{{collapsed?'':sysName}}</a>
 			</el-col>
 			<el-col :span="10">
 				<div class="tools" id="header-logo">
@@ -15,7 +15,7 @@
 			<!--用户登录信息-->
 			<el-col :span="4" class="userinfo">
 				<el-dropdown trigger="hover">
-					<span class="el-dropdown-link userinfo-inner"><img :src="this.sysUserAvatar" /> {{sysUserName}}</span>
+					<span class="el-dropdown-link userinfo-inner"><img :src="this.sysUserAvatar" /> \{{sysUserName}}</span>
 					<el-dropdown-menu slot="dropdown">
 						<el-dropdown-item>我的消息</el-dropdown-item>
 						<el-dropdown-item>设置</el-dropdown-item>
@@ -30,21 +30,21 @@
 					 unique-opened router :collapse="collapsed">
 					<template v-for="(item,index) in $router.options.routes" v-if="!item.hidden">
 						<el-submenu :index="index+''" v-if="item.children && !item.onlyPage">
-							<template slot="title"><i :class="item.iconCls"></i> <span slot="title">{{item.name}}</span></template>
-							<el-menu-item v-for="child in item.children" :index="item.path + '/' + child.path" :key="child.path" v-if="!child.hidden">{{child.name}}</el-menu-item>
+							<template slot="title"><i :class="item.iconCls"></i> <span slot="title">\{{item.name}}</span></template>
+							<el-menu-item v-for="child in item.children" :index="item.path + '/' + child.path" :key="child.path" v-if="!child.hidden">\{{child.name}}</el-menu-item>
 						</el-submenu>
-						<el-menu-item v-else-if="item.onlyPage" :index="item.path + '/' + item.children[0].path"><i :class="item.iconCls"></i><span slot="title">{{item.name}}</span></el-menu-item>
-						<el-menu-item v-else :index="item.path"><i :class="item.iconCls"></i><span slot="title">{{item.name}}</span></el-menu-item>
+						<el-menu-item v-else-if="item.onlyPage" :index="item.path + '/' + item.children[0].path"><i :class="item.iconCls"></i><span slot="title">\{{item.name}}</span></el-menu-item>
+						<el-menu-item v-else :index="item.path"><i :class="item.iconCls"></i><span slot="title">\{{item.name}}</span></el-menu-item>
 					</template>
 				</el-menu>
 
 			<section class="content-container">
 				<div class="grid-content bg-purple-light">
 					<el-col :span="24" class="breadcrumb-container">
-						<strong class="title">{{$route.name}}</strong>
+						<strong class="title">\{{$route.name}}</strong>
 						<el-breadcrumb separator="/" class="breadcrumb-inner">
 							<el-breadcrumb-item v-for="item in $route.matched" :key="item.path">
-								{{ item.name }}
+								\{{ item.name }}
 							</el-breadcrumb-item>
 						</el-breadcrumb>
 					</el-col>

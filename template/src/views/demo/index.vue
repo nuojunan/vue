@@ -3,10 +3,10 @@
     <div class="page-wrap">
      <mt-tab-container class="page-tabbar-container" v-model="selected">
        <mt-tab-container-item id="主页">
-        <h1 class="center">{{$t("hello.a")}}</h1>
+        <h1 class="center">\{{$t("hello.a")}}</h1>
         <div class="margin10">
-          <mt-button class="page-part" size="large" @click.native="gotoPage('/demo/detail')" type="primary"> {{$t("index.btn[0]")}}</mt-button>
-          <mt-button class="page-part" size="large" @click.native="openConfirm">{{$t("index.btn[1]")}}</mt-button>
+          <mt-button class="page-part" size="large" @click.native="gotoPage('/demo/detail')" type="primary"> \{{$t("index.btn[0]")}}</mt-button>
+          <mt-button class="page-part" size="large" @click.native="openConfirm">\{{$t("index.btn[1]")}}</mt-button>
         </div>
        </mt-tab-container-item>
        <mt-tab-container-item id="查询">
@@ -22,15 +22,15 @@
    <mt-tabbar v-model="selected" fixed>
      <mt-tab-item id="主页">
        <img slot="icon" src="../../assets/img/icon.png">
-       {{$t("index.tab[0]")}}
+       \{{$t("index.tab[0]")}}
      </mt-tab-item>
      <mt-tab-item id="查询">
        <img slot="icon" src="../../assets/img/icon.png">
-      {{$t("index.tab[1]")}}
+      \{{$t("index.tab[1]")}}
      </mt-tab-item>
      <mt-tab-item id="语言">
        <img slot="icon" src="../../assets/img/icon.png">
-       {{$t("index.tab[2]")}}
+       \{{$t("index.tab[2]")}}
      </mt-tab-item>
    </mt-tabbar>
   </div>

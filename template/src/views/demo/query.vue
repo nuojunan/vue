@@ -2,7 +2,7 @@
   <div class="page-loadmore" v-title data-title="查询">
     <nja-list @on-up-load="loadup" @on-down-load="loaddown" :height=50 ref="njaList">
       <ul class="page-loadmore-list" slot="list">
-        <li v-for="item in list" class="page-loadmore-listitem">{{ item }}</li>
+        <li v-for="item in list" class="page-loadmore-listitem">\{{ item }}</li>
       </ul>
     </nja-list>
   </div>
