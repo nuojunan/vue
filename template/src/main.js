@@ -18,6 +18,8 @@ import Mock from './mock';
 import store from './vuex/store';
 import ajax from './common/js/ajax';
 
+Vue.config.productionTip = false;
+
 {{#if_eq demoConfig "Mobile"}}
 Vue.use(Mint);
 {{/if_eq}}
@@ -27,6 +29,7 @@ Mock.bootstrap();
 {{/if_eq}}
 Vue.use(ajax);
 
+{{#if_eq demoConfig "Mobile"}}
 // error，loading是图片路径, 用require引入
 Vue.use(VueLazyload, {
     error: require('./assets/img/404.png'),
@@ -34,8 +37,7 @@ Vue.use(VueLazyload, {
     attempt: 1
   }
 );
-
-Vue.config.productionTip = false;
+{{/if_eq}}
 // 标题
 Vue.directive('title', {
   inserted: function (el, binding) {
@@ -63,6 +65,7 @@ Vue.prototype.$message = Mint.MessageBox;
 // 移动端点击延迟问题处理
 FastClick.attach(document.body);
 {{/if_eq}}
+
 new Vue({
   el: '#app',
   i18n,
