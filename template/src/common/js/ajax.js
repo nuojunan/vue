@@ -47,6 +47,34 @@ const _ajax = {
             params.error(error);
           });
       },
+      postObj (params) {
+        axiosBase({
+          url: params.url,
+          method: 'post',
+          responseType: 'text',
+          transformRequest: [function (data) {
+            let ret = '';
+            for (let it in data) {
+              ret += it + '=' + JSON.stringify(data[it]) + '&';
+            }
+            return ret;
+         }],
+          data: params.data,
+          headers: {
+            // 非json提交
+             'Content-Type': 'application/x-www-form-urlencoded'
+           }
+        }).then(function (response) {
+            if (response.data.status === -10) {
+                // 跳转登陆页面
+                return;
+            }
+            params.success(response.data);
+          }).catch(function (error) {
+            // 错误处理
+            params.error(error);
+          });
+      },
       postJson (params) {
         axiosBase({
           url: params.url,
