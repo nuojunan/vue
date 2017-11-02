@@ -17,6 +17,7 @@ import Mock from './mock';
 {{/if_eq}}
 import store from './vuex/store';
 import ajax from './common/js/ajax';
+import njaRouter from './common/js/nja-router';
 
 Vue.config.productionTip = false;
 {{#if_eq demoConfig "Mobile"}}
@@ -27,6 +28,7 @@ Vue.use(ElementUI);
 Mock.bootstrap();
 {{/if_eq}}
 Vue.use(ajax);
+Vue.use(njaRouter, router, store);
 {{#if_eq demoConfig "Mobile"}}
 // error，loading是图片路径, 用require引入
 Vue.use(VueLazyload, {
