@@ -113,7 +113,7 @@ export default {
 			this.$confirm('确认退出吗?', '提示', {
 				// type: 'warning'
 			}).then(() => {
-				sessionStorage.removeItem('user');
+				sessionStorage.clear();
 				_this.$router.push('/login');
 			}).catch(() => {
 			});

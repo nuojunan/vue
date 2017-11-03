@@ -12,7 +12,8 @@ const state = {
   'menuShow': false,
   'isLogin': false,
   'unitName': '-',
-  'isRefresh': true
+  'isRefresh': true,
+  'routers': []
 };
 // 创建一个对象存储一系列我们接下来要写的 mutation 函数
 const mutations = {

@@ -22,6 +22,7 @@
      "fastclick": "^1.0.6",
      "mint-ui": "^2.2.3",
     {{/if_eq}}
+    "nja-core": "0.0.1",
     "vue": "^2.2.2",
     "vue-i18n": "^6.0.0",
     "vue-lazyload": "^1.0.0-rc7",
