@@ -1,17 +1,15 @@
-import axios from 'axios';
+import { post, get } from '@/common/js/axios';
 
-let base = '';
+export const requestLogin = params => post(`/login`, params);
 
-export const requestLogin = params => { return axios.post(`${base}/login`, params).then(res => res.data); };
+export const getUserList = params => get(`/user/list`, params);
 
-export const getUserList = params => { return axios.get(`${base}/user/list`, { params: params }); };
+export const getUserListPage = params => get(`/user/listpage`, params);
 
-export const getUserListPage = params => { return axios.get(`${base}/user/listpage`, { params: params }); };
+export const removeUser = params => get(`/user/remove`, params);
 
-export const removeUser = params => { return axios.get(`${base}/user/remove`, { params: params }); };
+export const batchRemoveUser = params => get(`/user/batchremove`, params);
 
-export const batchRemoveUser = params => { return axios.get(`${base}/user/batchremove`, { params: params }); };
+export const editUser = params => get(`/user/edit`, params);
 
-export const editUser = params => { return axios.get(`${base}/user/edit`, { params: params }); };
-
-export const addUser = params => { return axios.get(`${base}/user/add`, { params: params }); };
+export const addUser = params => get(`/user/add`, params);
