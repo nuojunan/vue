@@ -45,7 +45,7 @@ const post = (url, params) => ajax({
         let val = data[it];
         if (val instanceof Array && val.length > 0 && (typeof val[0] !== 'object')) {
           val = encodeURIComponent(val);
-        } else if (typeof val === 'object')) {
+        } else if (typeof val === 'object') {
           val = JSON.stringify(val);
         }
         ret += it + '=' + val + '&';
@@ -107,7 +107,7 @@ const put = (url, params) => ajax({
         let val = data[it];
         if (val instanceof Array && val.length > 0 && (typeof val[0] !== 'object')) {
           val = encodeURIComponent(val);
-        } else if (typeof val === 'object')) {
+        } else if (typeof (val) === 'object') {
           val = JSON.stringify(val);
         }
         ret += it + '=' + val + '&';
