@@ -3,6 +3,27 @@ import MockAdapter from 'axios-mock-adapter';
 import { LoginUsers, Users } from './data/user';
 let _Users = Users;
 
+const toParam = params => {
+  if (!params) {
+    return {};
+  }
+  let result = {};
+  try {
+    result = JSON.parse(params);
+  } catch (e) {
+    if (typeof params === 'string') {
+      params.split('&').forEach(s => {
+        if (s.length > 1) {
+          let p = s.split('=');
+          result[p[0]] = p[1];
+        }
+      });
+      return result;
+    }
+  }
+  return result;
+};
+
 export default {
   /**
    * mock bootstrap
@@ -12,16 +33,18 @@ export default {
 
     // mock success request
     mock.onGet('/success').reply(200, {
+      status: 0,
       msg: 'success'
     });
 
     // mock error request
     mock.onGet('/error').reply(500, {
+      status: 0,
       msg: 'failure'
     });
     // 登录
     mock.onPost('/login').reply(config => {
-      let {username, password} = JSON.parse(config.data);
+      let {username, password} = toParam(config.data);
       return new Promise((resolve, reject) => {
         let user = null;
         setTimeout(() => {
@@ -32,11 +55,10 @@ export default {
               return true;
             }
           });
-
           if (hasUser) {
-            resolve([200, { code: 200, msg: '请求成功', user }]);
+            resolve([200, { status: 0, data: user }]);
           } else {
-            resolve([200, { code: 500, msg: '账号或密码错误' }]);
+            resolve([200, { status: 0, data: '账号或密码错误' }]);
           }
         }, 1000);
       });
@@ -51,7 +73,8 @@ export default {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           resolve([200, {
-            users: mockUsers
+            status: 0,
+            data: mockUsers
           }]);
         }, 1000);
       });
@@ -68,8 +91,9 @@ export default {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           resolve([200, {
-            total: total,
-            users: mockUsers
+            status: 0,
+            totalRows: total,
+            data: mockUsers
           }]);
         }, 1000);
       });
@@ -82,8 +106,8 @@ export default {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           resolve([200, {
-            code: 200,
-            msg: '删除成功'
+            status: 0,
+            data: '删除成功'
           }]);
         }, 500);
       });
@@ -97,8 +121,8 @@ export default {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           resolve([200, {
-            code: 200,
-            msg: '删除成功'
+            status: 0,
+            data: '删除成功'
           }]);
         }, 500);
       });
@@ -120,8 +144,8 @@ export default {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           resolve([200, {
-            code: 200,
-            msg: '编辑成功'
+            status: 0,
+            data: '编辑成功'
           }]);
         }, 500);
       });
@@ -140,8 +164,8 @@ export default {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           resolve([200, {
-            code: 200,
-            msg: '新增成功'
+            status: 0,
+            data: '新增成功'
           }]);
         }, 500);
       });
