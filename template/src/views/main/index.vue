@@ -28,7 +28,7 @@
 				<!--导航菜单-->
 				<el-menu :default-active="$route.path" class="el-menu-vertical-demo" @open="handleopen" @close="handleclose" @select="handleselect"
 					 unique-opened router :collapse="collapsed">
-					<template v-for="(item,index) in $router.options.routes" v-if="!item.hidden">
+					<template v-for="(item,index) in menus" v-if="!item.hidden">
 						<el-submenu :index="index+''" v-if="item.children && !item.onlyPage">
 							<template slot="title"><i :class="item.iconCls"></i> <span slot="title">\{{item.name}}</span></template>
 							<el-menu-item v-for="child in item.children" :index="item.path + '/' + child.path" :key="child.path" v-if="!child.hidden">\{{child.name}}</el-menu-item>
@@ -124,6 +124,11 @@ export default {
 		},
 		showMenu (i, status) {
 			this.$refs.menuCollapsed.getElementsByClassName('submenu-hook-' + i)[0].style.display = status ? 'block' : 'none';
+		}
+	},
+	computed: {
+		menus () {
+			return this.$router.options.routes;
 		}
 	},
 	mounted() {
