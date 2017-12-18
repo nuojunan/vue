@@ -12,7 +12,7 @@ import 'mint-ui/lib/style.css';
 {{/if_eq}}
 {{#if_eq demoConfig "PC"}}
 import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-default/index.css';
+import 'element-ui/lib/theme-chalk/index.css';
 import Mock from './mock';
 {{/if_eq}}
 import store from './vuex/store';
