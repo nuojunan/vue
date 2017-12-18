@@ -7,6 +7,20 @@ const ajax = axios.create({
   withCredentials: true
 });
 
+const param2String = data => {
+  let ret = '';
+  for (let it in data) {
+    let val = data[it];
+    if (val instanceof Array && val.length > 0 && (typeof val[0] !== 'object')) {
+      val = encodeURIComponent(val);
+    } else if (typeof val === 'object') {
+      val = JSON.stringify(val);
+    }
+    ret += it + '=' + val + '&';
+  }
+  return ret;
+};
+
 const get = (url, params) => ajax.get(url, { params: params }).then((res) => {
   if (res.status === 200 && res.data.status !== 0) {
       return Promise.reject(res.data);
@@ -18,6 +32,39 @@ const get = (url, params) => ajax.get(url, { params: params }).then((res) => {
   }
   return Promise.reject({data: error.message});
 });
+
+const download = (url, params) => {
+  return new Promise((resolve, reject) => {
+    try {
+      let iframe = document.createElement('iframe');
+      iframe.style.display = 'none';
+      // iframe.id = 'NJA_FRAME_ID';
+      let ps = param2String(params);
+      if (url.indexOf('?') !== -1) {
+        url += ('&' + ps);
+      } else {
+        url += ('?' + ps);
+      }
+      iframe.onload = function () {
+        // TODO 这下载不调用问题
+        document.body.removeChild(iframe);
+      };
+      iframe.src = store.getters.serviceHost + url;
+      setTimeout(() => {
+        resolve('ok');
+      }, 1000);
+      window.addEventListener('message', function(error) {
+        let res = JSON.parse(error.data);
+        if (res && typeof res === 'object' && 'status' in res && res.status !== 0) {
+          reject(res);
+        }
+      });
+      document.body.appendChild(iframe);
+    } catch (e) {
+      reject({data: 'error', status: -1});
+    }
+  });
+};
 
 const postJson = (url, params) => ajax({
     url: url,
@@ -40,17 +87,7 @@ const post = (url, params) => ajax({
     method: 'post',
     responseType: 'text',
     transformRequest: [function (data) {
-      let ret = '';
-      for (let it in data) {
-        let val = data[it];
-        if (val instanceof Array && val.length > 0 && (typeof val[0] !== 'object')) {
-          val = encodeURIComponent(val);
-        } else if (typeof val === 'object') {
-          val = JSON.stringify(val);
-        }
-        ret += it + '=' + val + '&';
-      }
-      return ret;
+      return param2String(data);
    }],
     data: params,
     headers: {
@@ -102,17 +139,7 @@ const put = (url, params) => ajax({
     method: 'put',
     responseType: 'text',
     transformRequest: [function (data) {
-      let ret = '';
-      for (let it in data) {
-        let val = data[it];
-        if (val instanceof Array && val.length > 0 && (typeof val[0] !== 'object')) {
-          val = encodeURIComponent(val);
-        } else if (typeof (val) === 'object') {
-          val = JSON.stringify(val);
-        }
-        ret += it + '=' + val + '&';
-      }
-      return ret;
+      return param2String(data);
    }],
     data: params,
     headers: {
@@ -134,6 +161,7 @@ const put = (url, params) => ajax({
 export {
   ajax,
   get,
+  download,
   postJson,
   post,
   del,
