@@ -58,7 +58,7 @@ export default {
           if (hasUser) {
             resolve([200, { status: 0, data: user }]);
           } else {
-            resolve([200, { status: 0, data: '账号或密码错误' }]);
+            resolve([200, { status: -1, data: '账号或密码错误' }]);
           }
         }, 1000);
       });
