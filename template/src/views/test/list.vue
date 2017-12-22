@@ -168,9 +168,9 @@
 				};
 				// this.listLoading = true;
 				// NProgress.start();
-				getUserListPage(para).then((data) => {
-					this.total = data.total;
-					this.users = data.users;
+				getUserListPage(para).then((res) => {
+					this.total = res.totalRows;
+					this.users = res.data;
 					this.listLoading = false;
 					// NProgress.done();
 				});
