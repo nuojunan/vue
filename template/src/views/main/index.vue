@@ -114,7 +114,8 @@ export default {
 				// type: 'warning'
 			}).then(() => {
 				sessionStorage.clear();
-				_this.$router.push('/login');
+				// _this.$router.push('/login');
+				window.location.href = '#';
 			}).catch(() => {
 			});
 		},
