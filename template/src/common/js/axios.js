@@ -11,12 +11,14 @@ const param2String = data => {
   let ret = '';
   for (let it in data) {
     let val = data[it];
-    if (val instanceof Array && val.length > 0 && (typeof val[0] !== 'object')) {
-      val = encodeURIComponent(val);
-    } else if (typeof val === 'object') {
+    if (typeof val === 'object' && //
+        (!(val instanceof Array) || (val.length > 0 && (typeof val[0] === 'object')))) {
       val = JSON.stringify(val);
     }
-    ret += it + '=' + val + '&';
+    ret += it + '=' + encodeURIComponent(val) + '&';
+  }
+  if (ret.length > 0) {
+    ret = ret.substring(0, ret.length - 1);
   }
   return ret;
 };

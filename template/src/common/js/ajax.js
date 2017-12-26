@@ -6,6 +6,22 @@ const axiosBase = axios.create({
   timeout: 2000
 });
 
+const param2String = data => {
+  let ret = '';
+  for (let it in data) {
+    let val = data[it];
+    if (typeof val === 'object' && //
+        (!(val instanceof Array) || (val.length > 0 && (typeof val[0] === 'object')))) {
+      val = JSON.stringify(val);
+    }
+    ret += it + '=' + encodeURIComponent(val) + '&';
+  }
+  if (ret.length > 0) {
+    ret = ret.substring(0, ret.length - 1);
+  }
+  return ret;
+};
+
 const _ajax = {
       get (params) {
         axiosBase.get(params.url, {params: params.data}).then(function (response) {
@@ -25,11 +41,7 @@ const _ajax = {
           method: 'post',
           responseType: 'text',
           transformRequest: [function (data) {
-            let ret = '';
-            for (let it in data) {
-              ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&';
-            }
-            return ret;
+            return param2String(data);
          }],
           data: params.data,
           headers: {
@@ -53,11 +65,7 @@ const _ajax = {
           method: 'post',
           responseType: 'text',
           transformRequest: [function (data) {
-            let ret = '';
-            for (let it in data) {
-              ret += it + '=' + JSON.stringify(data[it]) + '&';
-            }
-            return ret;
+            return param2String(data);
          }],
           data: params.data,
           headers: {
