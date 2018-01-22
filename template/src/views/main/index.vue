@@ -13,15 +13,25 @@
 				</div>
 			</el-col>
 			<!--用户登录信息-->
-			<el-col :span="4" class="userinfo">
-				<el-dropdown trigger="hover">
-					<span class="el-dropdown-link userinfo-inner"><img :src="this.sysUserAvatar" /> \{{sysUserName}}</span>
-					<el-dropdown-menu slot="dropdown">
-						<el-dropdown-item>我的消息</el-dropdown-item>
-						<el-dropdown-item>设置</el-dropdown-item>
-						<el-dropdown-item divided @click.native="logout">退出登录</el-dropdown-item>
-					</el-dropdown-menu>
+			<el-col :span="4">
+				<el-col :span="10" class="header-langs">
+					<el-dropdown trigger="hover">
+				  <span class="el-dropdown-link header-langs">\{{$i18n.loadedLang.lang| langName}}<i class="el-icon-arrow-down el-icon--right"></i></span>
+				  <el-dropdown-menu slot="dropdown">
+				    <el-dropdown-item v-for="(item, index) in langs" :key="index" @click.native="changedLang(`${item.lang}`);">\{{item.name}}</el-dropdown-item>
+				  </el-dropdown-menu>
 				</el-dropdown>
+				</el-col>
+				<el-col :span="14" class="userinfo">
+					<el-dropdown trigger="hover">
+						<span class="el-dropdown-link userinfo-inner"><img :src="this.sysUserAvatar" /> \{{sysUserName}}</span>
+						<el-dropdown-menu slot="dropdown">
+							<el-dropdown-item>我的消息</el-dropdown-item>
+							<el-dropdown-item>设置</el-dropdown-item>
+							<el-dropdown-item divided @click.native="logout">退出登录</el-dropdown-item>
+						</el-dropdown-menu>
+					</el-dropdown>
+				</el-col>
 			</el-col>
 		</el-col>
 		<el-col :span="24" class="main">
@@ -60,6 +70,7 @@
 </template>
 
 <script>
+import Langs from '@/i18n/langs';
 export default {
 	data () {
 		return {
@@ -68,6 +79,7 @@ export default {
 			sysUserName: '',
 			sysUserAvatar: '',
 			loadProgress: 0,
+			langs: Langs,
 			form: {
 				name: '',
 				region: '',
@@ -81,11 +93,18 @@ export default {
 		};
 	},
 	beforeRouteUpdate (to, from, next) {
-		console.log(22222222);
 		this.startProgress();
 		next();
 	},
+	filters: {
+		langName (lang) {
+			return Langs.filter(l => l.lang === lang)[0].name;
+		}
+	},
 	methods: {
+		changedLang (lang) {
+			this.$i18n.loadLanguageAsync(lang).then(() => console.log('加载完成======='));
+		},
 		startProgress() {
 			if (this.loadProgress > 100) {
 				this.loadProgress = 0;
@@ -109,12 +128,10 @@ export default {
 		},
 		// 退出登录
 		logout () {
-			var _this = this;
 			this.$confirm('确认退出吗?', '提示', {
 				// type: 'warning'
 			}).then(() => {
 				sessionStorage.clear();
-				// _this.$router.push('/login');
 				window.location.href = '#';
 			}).catch(() => {
 			});
@@ -131,6 +148,7 @@ export default {
 		menus () {
 			return this.$router.options.routes;
 		}
+
 	},
 	mounted() {
 		var user = sessionStorage.getItem('user');
@@ -160,6 +178,10 @@ export default {
 		line-height: 60px;
 		background: var(--color-primary);
 		color:#fff;
+		.header-langs {
+			color: #fff;
+			cursor: pointer;
+		}
 		.userinfo {
 			text-align: right;
 			padding-right: 35px;
