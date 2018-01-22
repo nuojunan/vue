@@ -15,7 +15,7 @@
 			<!--用户登录信息-->
 			<el-col :span="4">
 				<el-col :span="10" class="header-langs">
-					<el-dropdown trigger="hover">
+					<el-dropdown trigger="hover" class="header-langs-dropdown">
 				  <span class="el-dropdown-link header-langs">\{{$i18n.loadedLang.lang| langName}}<i class="el-icon-arrow-down el-icon--right"></i></span>
 				  <el-dropdown-menu slot="dropdown">
 				    <el-dropdown-item v-for="(item, index) in langs" :key="index" @click.native="changedLang(`${item.lang}`);">\{{item.name}}</el-dropdown-item>
@@ -181,6 +181,10 @@ export default {
 		.header-langs {
 			color: #fff;
 			cursor: pointer;
+			text-align: right;
+			.header-langs-dropdown {
+				height: 100%;
+			}
 		}
 		.userinfo {
 			text-align: right;
