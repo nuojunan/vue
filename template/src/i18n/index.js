@@ -4,16 +4,23 @@ import { get, put } from '@/common/js/store';
 import langs from './langs';
 import router from '@/router';
 import axios from 'axios';
-Vue.use(VueI18n);
+import Element from 'element-ui';
 
-let local = get('system', 'local', 'zhCN');
+Vue.use(VueI18n);
+let defaultLanguage = 'zh-CN';
+if (navigator.language) {
+  defaultLanguage = navigator.language;
+} else if (navigator.browserLanguage) {
+  defaultLanguage = navigator.browserLanguage;
+}
+let local = get('system', 'local', defaultLanguage);
 // message 存放过多会导致性能下降， 所以这么只放一个当前语言 @ldy
 const messages = {'local': false};
 try {
   messages.local = require(`./langs/${local}.json`);
 } catch (e) {
   console.error(e);
-  local = 'zhCN';
+  local = defaultLanguage;
   messages.local = require(`./langs/${local}.json`);
 }
 // const messages = {'local': require(`./langs/${local}.json`)};
@@ -27,6 +34,9 @@ i18n.loadedLang = {
   loadMore: {}
 };
 
+Vue.use(Element, {
+  i18n: (key, value) => i18n.t(key, value)
+});
 function setI18nLanguage (lang) {
   put('system', 'local', lang); // 存放选择语言
   axios.defaults.headers.common['Accept-Language'] = lang;
