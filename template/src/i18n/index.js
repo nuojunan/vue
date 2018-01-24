@@ -31,6 +31,7 @@ const i18n = new VueI18n({
 
 i18n.loadedLang = {
   lang: local,
+  last: false,
   loadMore: {}
 };
 
@@ -60,6 +61,7 @@ function loadLanguageAsync (lang) {
   return Promise.resolve(lang);
 }
 function loadPageLanguageAsync (page) {
+  i18n.loadedLang.last = page;
   let key = path2key(page);
   if (!i18n.loadedLang.loadMore[key]) {
       return import(/* webpackChunkName: "lang-[request]" */ `@/i18n/langs/${page}/${i18n.loadedLang.lang}.json`).then(msgs => {
@@ -85,10 +87,10 @@ const path2key = path => {
 * 扩展tp方法，获取对应页面的多语言数据
 * @ldy
 */
-i18n.tp = function (key, values) {
-  let path = Vue.$router.currentRoute.meta.i18n;
+i18n.tp = function(key, values) {
+  let path = i18n.loadedLang.last;
   if (path) {
-    loadPageLanguageAsync(path);
+     loadPageLanguageAsync(path);
      let pagekey = path2key(path) + '.' + key;
      let value = i18n.t(pagekey, values);
      return value === pagekey ? key : value;
@@ -122,6 +124,8 @@ Object.defineProperty(Vue.prototype, '$tp', {
 router.afterEach((to, from) => {
   if ('i18n' in to.meta) {
     loadPageLanguageAsync(to.meta.i18n);
+  } else {
+    i18n.loadedLang.last = false;
   }
 });
 export default i18n;
