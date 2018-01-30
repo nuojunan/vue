@@ -93,7 +93,7 @@ i18n.tp = function(key, values) {
      loadPageLanguageAsync(path);
      let pagekey = path2key(path) + '.' + key;
      let value = i18n.t(pagekey, values);
-     return value === pagekey ? key : value;
+     return value === pagekey ? i18n.t(key, values) : value;
   }
   console.warn('router undefind meta.i18n');
   return i18n.t(key, values);
@@ -110,7 +110,7 @@ Object.defineProperty(Vue.prototype, '$tp', {
           loadPageLanguageAsync(path);
           let pagekey = path2key(path) + '.' + key;
           let value = i18n.t(pagekey, values);
-          return value === pagekey ? key : value;
+          return value === pagekey ? i18n.t(key, values) : value;
         }
         console.warn('router undefind meta.i18n');
         return i18n.t(key, values);
