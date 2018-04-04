@@ -132,7 +132,7 @@ export default {
 				// type: 'warning'
 			}).then(() => {
 				sessionStorage.clear();
-				window.location.href = '#';
+				window.location.href = '/';
 			}).catch(() => {
 			});
 		},
@@ -146,7 +146,7 @@ export default {
 	},
 	computed: {
 		menus () {
-			return this.$router.options.routes;
+			return this.$store.state.routers;
 		}
 
 	},
