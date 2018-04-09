@@ -8,39 +8,9 @@ export default new Router({
   routes: [
     { // 首页
       path: '/',
-	  name: 'index',
-      {{#if_eq demoConfig "PC"}}
+      name: 'index',
       hidden: true,
       redirect: '/login'
-      {{/if_eq}}
-      {{#if_eq demoConfig "Mobile"}}
-      redirect: '/demo'
-      {{/if_eq}}
-      {{#if_eq demo false}}
-       component: (resolve) => require(['@/views/hello.vue'], resolve)
-      {{/if_eq}}
-    {{#if_eq demoConfig "Mobile"}}
-    }, {
-      path: '/demo',
-      name: 'demo',
-      hidden: true,
-      component: (resolve) => require(['@/App.vue'], resolve),
-      children: [
-       {
-         path: '',
-         name: 'index',
-         component: (resolve) => require(['@/views/demo/index.vue'], resolve)
-       }, {
-         path: 'detail',
-         component: (resolve) => require(['@/views/demo/detail.vue'], resolve)
-       }, {
-         path: '*',
-         hidden: true,
-         redirect: 'index'
-       }
-     ]
-     {{/if_eq}}
-     {{#if_eq demoConfig "PC"}}
    }, {
      path: '/index',
      name: '嵌套路由单页面',
@@ -69,6 +39,11 @@ export default new Router({
         name: 'postcss样式测试',
         component: (resolve) => require(['@/views/test/index.vue'], resolve)
       }, {
+        path: 'i18n',
+        name: 'i18n测试',
+        meta: {i18n: 'test/i18ntest'},
+        component: (resolve) => require(['@/views/test/i18ntest.vue'], resolve)
+      }, {
         path: 'from',
         name: '表单',
         component: (resolve) => require(['@/views/test/from.vue'], resolve)
@@ -92,7 +67,6 @@ export default new Router({
      name: '简单路由单页面',
      iconCls: 'el-icon-upload',
      component: (resolve) => require(['@/views/hello.vue'], resolve)
-    {{/if_eq}}
     }
   ]
 });

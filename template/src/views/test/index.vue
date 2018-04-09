@@ -1,7 +1,6 @@
 <template lang="html">
 <div class="test">
   wowoowowowowowo
-  \{{$tp('index.tab[0]')}}
   <div class="test-main">
   hjjjjjj
   <span class="test-main-span">22222222</span>

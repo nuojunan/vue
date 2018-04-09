@@ -1,0 +1,13 @@
+{
+  "title": "多语言测试",
+  "message": {
+    "notNull": "不为空",
+    "notNumber": "必须为数字",
+    "minNumber": "不能小于 {0}"
+  },
+  "form": {
+    "age": "年龄",
+    "submit": "提交",
+    "reset": "重置"
+  }
+}

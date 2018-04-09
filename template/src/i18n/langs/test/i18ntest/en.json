@@ -1,0 +1,13 @@
+{
+  "title": "Multilingual test",
+  "message": {
+    "notNull": "Not empty",
+    "notNumber": "Must be Number",
+    "minNumber": "Cannot be less than {0}"
+  },
+  "form": {
+    "age": "Age",
+    "submit": "Submit",
+    "reset": "Reset"
+  }
+}
