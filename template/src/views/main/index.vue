@@ -3,7 +3,7 @@
 		<el-progress class="progress" v-show="loadProgress > 0 && loadProgress < 100" :percentage="loadProgress" :stroke-width="3" status="exception" :show-text="false"></el-progress>
 		<!-- 头部信息-->
 		<el-col :span="24" class="header">
-			<el-col :span="10" class="logo" :class="collapsed?'logo-collapse-width':'logo-width'">
+			<el-col :span="10" class="logo">
 				<img src="../../assets/img/logo.png" @click="collapse">
 				<a @click="collapse">\{{collapsed?'':sysName}}</a>
 			</el-col>

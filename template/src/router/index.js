@@ -8,7 +8,7 @@ export default new Router({
   routes: [
     { // 首页
       path: '/',
-      name: 'index',
+	  name: 'index',
       {{#if_eq demoConfig "PC"}}
       hidden: true,
       redirect: '/login'
@@ -49,8 +49,8 @@ export default new Router({
      onlyPage: true,
      children: [
       {
-        path: '',
-        name: 'index',
+        path: 'index',
+        name: 'index1',
         component: (resolve) => require(['@/views/hello.vue'], resolve)
       }
      ]
@@ -61,8 +61,8 @@ export default new Router({
      component: (resolve) => require(['@/views/main/index.vue'], resolve),
      children: [
       {
-        path: '',
-        name: 'index',
+        path: 'index',
+        name: 'index2',
         component: (resolve) => require(['@/views/hello.vue'], resolve)
       }, {
         path: 'abc',
@@ -79,7 +79,7 @@ export default new Router({
       }, {
         path: '*',
         hidden: true,
-        redirect: 'index'
+        redirect: 'index2'
       }
     ]
   }, { // login
