@@ -25,7 +25,7 @@ export default {
         callback(new Error(this.$i18n.tp('message.notNumber')));
       } else {
         if (value < 18) {
-          callback(new Error(this.$i18n.tp('message.minNumber')));
+          callback(new Error(this.$i18n.tp('message.minNumber', [18])));
         } else {
           callback();
         }
